@@ -9,6 +9,8 @@ import (
 )
 
 func main() {
+	fs := http.FileServer(http.Dir("./static"))
+	http.Handle("/", fs)
 	http.HandleFunc("/api/whoami", func(w http.ResponseWriter, r *http.Request) {
 
 		type Response struct {
@@ -37,7 +39,7 @@ func main() {
 
 // GetPort the Port from the environment so we can run on Heroku
 func GetPort() string {
-	var port = os.Getenv("PORT")
+	port := os.Getenv("PORT")
 	// Set a default port if there is nothing in the environment
 	if port == "" {
 		port = "4747"
