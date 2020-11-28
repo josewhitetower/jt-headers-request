@@ -30,7 +30,7 @@ func main() {
 
 	})
 
-	port := GetPort()
+	port := getPort()
 
 	log.Println("Server running in port: " + port)
 	log.Fatal(http.ListenAndServe(port, nil))
@@ -38,7 +38,7 @@ func main() {
 }
 
 // GetPort the Port from the environment so we can run on Heroku
-func GetPort() string {
+func getPort() string {
 	port := os.Getenv("PORT")
 	// Set a default port if there is nothing in the environment
 	if port == "" {
