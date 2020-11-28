@@ -16,7 +16,7 @@ func main() {
 			IPAddress string `json:"ipaddress"`
 		}
 
-		res := Response{r.Header.Get("Accept-Language")[0], r.Header.Get("User-Agent")[0], r.RemoteAddr}
+		res := Response{r.Header.Values("Accept-Language")[0], r.Header.Values("User-Agent")[0], r.RemoteAddr}
 		js, err := json.Marshal(res)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
