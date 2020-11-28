@@ -31,7 +31,7 @@ func main() {
 	port := GetPort()
 
 	log.Println("Server running in port: " + port)
-	log.Fatal(http.ListenAndServe(": "+port, nil))
+	log.Fatal(http.ListenAndServe(port, nil))
 
 }
 
