@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -27,9 +28,20 @@ func main() {
 
 	})
 
-	port := os.Getenv("PORT")
+	port := GetPort()
 
 	log.Println("Server running in port: " + port)
 	log.Fatal(http.ListenAndServe(": "+port, nil))
 
+}
+
+// GetPort the Port from the environment so we can run on Heroku
+func GetPort() string {
+	var port = os.Getenv("PORT")
+	// Set a default port if there is nothing in the environment
+	if port == "" {
+		port = "4747"
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
+	}
+	return ":" + port
 }
