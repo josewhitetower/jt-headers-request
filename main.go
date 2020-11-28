@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -27,9 +27,9 @@ func main() {
 
 	})
 
-	const port = 8080
+	port := os.Getenv("PORT")
 
-	log.Println("Server running in port " + fmt.Sprint(port))
-	log.Fatal(http.ListenAndServe(":"+fmt.Sprint(port), nil))
+	log.Println("Server running in port: " + port)
+	log.Fatal(http.ListenAndServe(": "+port, nil))
 
 }
