@@ -19,14 +19,14 @@ func main() {
 			IPAddress string `json:"ipaddress"`
 		}
 
-		res := Response{r.Header.Values("Accept-Language")[0], r.Header.Values("User-Agent")[0], r.RemoteAddr}
-		js, err := json.Marshal(res)
+		res := Response{r.Header.Get("Accept-Language"), r.Header.Get("User-Agent"), r.RemoteAddr}
+		json, err := json.Marshal(res)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		w.Write(js)
+		w.Write(json)
 
 	})
 
